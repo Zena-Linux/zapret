@@ -88,7 +88,6 @@ jobs:
           sudo -E buildah build \
             --target ${{ env.IMAGE_NAME }} \
             --file Containerfile \
-            --build-arg-file build_args.txt \
             --tag raw-img .
 
       - name: Load in podman and tag
