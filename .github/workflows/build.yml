@@ -90,7 +90,7 @@ jobs:
 
       - name: Load in podman and tag
         run: |
-          IMAGE=$(podman pull docker-daemon:raw-img:latest)
+          IMAGE=$(podman pull localhost/raw-img)
           for tag in ${{ steps.metadata.outputs.tags }}; do
             podman tag $IMAGE "${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:$tag"
           done
