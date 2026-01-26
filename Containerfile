@@ -28,6 +28,9 @@ RUN mkdir -p /etc/systemd/system/virtqemud.socket.d && \
         'SocketMode=0770' \
     > /etc/systemd/system/virtqemud.socket.d/override.conf
 
+RUN systemctl --global mask pipewire.socket pipewire-pulse.socket 2>/dev/null || true && \
+    systemctl --global mask pipewire.service pipewire-pulse.service 2>/dev/null || true
+
 RUN systemctl enable virtqemud.socket \
     virtnetworkd.socket \
     virtstoraged.socket \
