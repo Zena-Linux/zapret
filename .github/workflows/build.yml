@@ -78,7 +78,6 @@ jobs:
             org.opencontainers.image.url=https://github.com/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}/tree/${{ github.sha }}
             org.opencontainers.image.vendor=${{ github.repository_owner }}
             org.opencontainers.image.version={{date 'YYYYMMDD'}}
-            containers.bootc=1
           sep-tags: ' '
           sep-annotations: ' '
 
@@ -91,8 +90,7 @@ jobs:
 
       - name: Load in podman and tag
         run: |
-          IMAGE=$(podman pull ${{ steps.rechunk.outputs.ref }})
-          sudo rm -rf ${{ steps.rechunk.outputs.output }}
+          IMAGE=$(podman pull docker-daemon:raw-img:latest)
           for tag in ${{ steps.metadata.outputs.tags }}; do
             podman tag $IMAGE "${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:$tag"
           done
