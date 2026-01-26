@@ -86,7 +86,6 @@ jobs:
         id: build_image
         run: |
           sudo -E buildah build \
-            --target ${{ env.IMAGE_NAME }} \
             --file Containerfile \
             --tag raw-img .
 
